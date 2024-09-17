@@ -4,14 +4,13 @@ import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 import { useEffect, useRef, useState } from "react";
 
-import { hightlightsSlides } from "../constants";
+import { hightlightsSlides } from "../Constants";
 import { pauseImg, playImg, replayImg } from "../utils";
 
 const VideoCarousel = () => {
   const videoRef = useRef([]);
   const videoSpanRef = useRef([]);
   const videoDivRef = useRef([]);
-
   // video and indicator
   const [video, setVideo] = useState({
     isEnd: false,
@@ -127,6 +126,7 @@ const VideoCarousel = () => {
 
   // vd id is the id for every video until id becomes number 3
   const handleProcess = (type, i) => {
+
     switch (type) {
       case "video-end":
         setVideo((pre) => ({ ...pre, isEnd: true, videoId: i + 1 }));
