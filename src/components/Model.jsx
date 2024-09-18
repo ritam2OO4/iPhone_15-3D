@@ -16,6 +16,7 @@ export default function Model() {
         color: ['#8F8A81', '#FFE7B9', '#6F6C64'],
         img: yellowImg,
     })
+
     //camera control for model specific view
     const cameraControlSmall = useRef();
     const cameraControlLarge = useRef();
@@ -34,6 +35,49 @@ export default function Model() {
             opacity: 1,
         })
     }, [])
+    useEffect(() => {
+        if (!large.current && !small.current) {
+            console.log("no ref")
+            return;
+        }
+        const timeline = gsap.timeline();  // Move inside useEffect to ensure proper initialization
+        if (size === 'large') {
+            timeline.to(small.current.rotation, {
+                y: smallRotation,
+                ease: 'power2.inOut',
+            })
+            timeline.to("#view1", {
+                ease: 'power2.inOut',
+                transform: 'translateX(-100%)',
+                duration: 2,
+            }, "<");
+
+            timeline.to("#view2", {
+                ease: 'power2.inOut',
+                transform: 'translateX(-100%)',
+                duration: 2,
+            }, "<");
+        }
+        if (size === 'small') {
+            timeline.to(large.current.rotation, {
+                y: largeRotation,
+                ease: 'power2.inOut',
+            })
+            timeline.to("#view2", {
+                ease: 'power2.inOut',
+                transform: 'translateX(0)',
+                duration: 2,
+            }, "<");
+
+            timeline.to("#view1", {
+                ease: 'power2.inOut',
+                transform: 'translateX(0)',
+                duration: 2,
+            }, "<");
+        }
+
+    }, [size]); // Be sure to include relevant dependencies
+
     return (
         <section className='common-padding'>
             <div className='screen-max-width'>
@@ -83,7 +127,7 @@ export default function Model() {
                                         key={i}
                                         className='mx-2 w-6 h-6 rounded-full cursor-pointer'
                                         style={{ backgroundColor: `${item.color[0]}` }}
-                                        onClick={() =>(setModel(item)) } >
+                                        onClick={() => (setModel(item))} >
                                     </li>
                                 ))}
                             </ul>
