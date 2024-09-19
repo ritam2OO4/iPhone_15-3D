@@ -12,7 +12,7 @@ function HowItWorks() {
             scrollTrigger: {
                 trigger: "#chip",
                 start: "20% bottom",
-                toggleActions: "restart none  none restart"
+                toggleActions: "restart none none restart"
             },
             opacity: 0,
             scale: 2,
@@ -24,7 +24,7 @@ function HowItWorks() {
             y: 0, opacity: 1, ease: "power2.inOut", duration: 1,
             scrollTrigger: {
                 trigger: ".g_fadeIn",
-                toggleActions: "restart reverse restart reverse",
+                toggleActions: "restart none none reverse",
                 start: 'top 85%',
                 // scrub: 5.5,  // ...scrollProps,
             }
